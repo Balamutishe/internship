@@ -33,4 +33,4 @@ function createObjFromArr3(arr) {
 }
 
 const result= createObjFromArr1(strArr);
-console.log(result)
+console.log(result);
