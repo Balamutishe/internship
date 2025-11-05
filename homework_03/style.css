@@ -1,0 +1,61 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+
+  font-size: 5rem;
+}
+
+button {
+  width: 20rem;
+  height: 6rem;
+  border-radius: 0.5rem;
+
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.disactive {
+  background-color: red;
+}
+
+.active {
+  background-color: green;
+}
