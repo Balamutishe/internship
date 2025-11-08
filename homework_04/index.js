@@ -1,4 +1,4 @@
-class ServiceSwaggerTasks {
+class ServiceFetchSwaggerTasks {
   async fetchTasks() {
     try {
       return await fetch('https://tasks-service-maks1394.amvera.io/tasks')
@@ -70,8 +70,120 @@ class ServiceSwaggerTasks {
   }
 }
 
+class ServiceXmlSwaggerTasks {
+  async fetchTasks() {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://tasks-service-maks1394.amvera.io/tasks');
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(JSON.parse(xhr.responseText));
+        } else {
+          rej(new Error(`Ошибка сети: ${xhr.status}`));
+        }
+      };
+
+      xhr.onerror = () => {
+        rej(new Error('Failed to fetch tasks'));
+      };
+
+      xhr.send();
+    })
+  }
+
+  async fetchTaskById(id) {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `https://tasks-service-maks1394.amvera.io/tasks/${id}`);
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(JSON.parse(xhr.responseText));
+        } else {
+          rej(new Error(`Ошибка сети: ${xhr.status}`));
+        }
+      };
+
+      xhr.onerror = () => {
+        rej(new Error(`Failed to fetch task ${id}`));
+      };
+
+      xhr.send();
+    })
+  }
+
+  async fetchTaskCreate(taskData) {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `https://tasks-service-maks1394.amvera.io/tasks`);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(JSON.parse(xhr.responseText));
+        } else {
+          rej(new Error(`Ошибка сети: ${xhr.status}`));
+        }
+      };
+
+      xhr.onerror = () => {
+        rej(new Error(`Failed task created`));
+      };
+
+      xhr.send(JSON.stringify(taskData));
+    })
+  }
+
+  async fetchTaskDeleteById(id) {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('DELETE', `https://tasks-service-maks1394.amvera.io/tasks/${id}`);
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(JSON.parse(xhr.responseText));
+        } else {
+          rej(new Error(`Ошибка сети: ${xhr.status}`));
+        }
+      };
+
+      xhr.onerror = () => {
+        rej(new Error(`Error deleting task`));
+      };
+
+      xhr.send();
+    })
+  }
+
+  async fetchTaskUpdateById(id, updateData) {
+    const taskData = await this.fetchTaskById(id)
+
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('PATCH', `https://tasks-service-maks1394.amvera.io/tasks/${id}`);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          res(JSON.parse(xhr.responseText));
+        } else {
+          rej(new Error(`Ошибка сети: ${xhr.status}`));
+        }
+      };
+
+      xhr.onerror = () => {
+        rej(new Error(`Failed task created`));
+      };
+
+      xhr.send(JSON.stringify({...taskData, ...updateData}));
+    })
+  }
+}
+
 class TasksData {
-  _service = new ServiceSwaggerTasks()
+  _service =
+      ServiceFetchSwaggerTasks ? new ServiceFetchSwaggerTasks() : new ServiceXmlSwaggerTasks();
 
   async fetchTasks() {
     return await this._service.fetchTasks()
