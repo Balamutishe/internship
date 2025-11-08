@@ -24,23 +24,10 @@ body {
   height: 100vh;
 }
 
-header {
-  height: 60px;
-  background-color: black;
-}
-
-main {
-  height: calc(100vh - 120px);
-}
-
-footer {
-  height: 60px;
-  background-color: black;
-}
-
-h1 {
-  color: white;
-  font-size: 2rem;
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .container {
@@ -49,5 +36,77 @@ h1 {
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
+}
+
+.button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.button:hover,
+.button:active {
+  opacity: 0.8;
+}
+
+.header {
+  height: 60px;
+  background-color: black;
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__title {
+  color: white;
+  font-size: 2rem;
+}
+
+.header__button {
+  color: white;
+  background-color: green;
+}
+
+.main {
+  height: calc(100vh - 120px);
+}
+
+.main__content {
+  align-items: start;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  width: 60%;
+}
+
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.list__item--delete {
+  color: white;
+  background-color: red;
+  cursor: pointer;
+}
+
+.list__item--change {
+  color: white;
+  background-color: orange;
+}
+
+.footer {
+  height: 60px;
+  background-color: black;
 }

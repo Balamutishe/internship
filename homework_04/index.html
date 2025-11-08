@@ -9,20 +9,21 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <title>Homework_03</title>
     <link href="style.css" rel="stylesheet" />
-    <script defer src="index.js"></script>
+    <script defer src="index.js" type="module"></script>
   </head>
   <body>
-      <header>
-        <section class="container">
-          <h1>HOMEWORK 4</h1>
+      <header class="header">
+        <section class="container header__content">
+          <h1 class="header__title">HOMEWORK 4</h1>
+          <button class="button header__button" id="buttonTaskAdd">Add task</button>
         </section>
       </header>
-      <main>
-        <section class="container">
-          MAIN
+      <main class="main">
+        <section class="container main__content">
+          <ul class="list" id="taskList"></ul>
         </section>
       </main>
-      <footer>
+      <footer class="footer">
         <section class="container">
           FOOTER
         </section>
