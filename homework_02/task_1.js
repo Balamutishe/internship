@@ -1,16 +1,17 @@
-function var1(x = 0) {
-  return (y) => {
-    if (!y) return x;
+function sum(x = 0) {
+  let sum = x;
 
-    return (z) => {
-      if (!z) return x + y;
+  function insideSum(y) {
+    if (arguments.length === 0 || y === undefined) {
+      return sum;
+    }
 
-      return x + y + z;
-    };
-  };
+    sum += y;
+    return insideSum;
+  }
+
+  return insideSum;
 }
 
-const var2 = x => y => z => x + y + z;
-
-const result1 = var1(2)(3)(5);
-const result2 = var2(2)(3)(5);
+const result = sum(2)(3)(5)(7);
+console.log(result());
